@@ -1,0 +1,12 @@
+D:\项目目录\system_test\src\main\java\com\gk\dao\CatInfoResponsitory.java
+D:\项目目录\system_test\src\main\java\com\gk\SystemTestApplication.java
+D:\项目目录\system_test\src\main\java\com\gk\entity\jsonManage\CatInfo.java
+D:\项目目录\system_test\src\main\java\com\gk\protocol\jsonManage\AddReq.java
+D:\项目目录\system_test\src\main\java\com\gk\service\impl\JsonServiceImpl.java
+D:\项目目录\system_test\src\main\java\com\gk\dao\JsonDataInfoResponsitory.java
+D:\项目目录\system_test\src\main\java\com\gk\entity\jsonManage\JsonDataInfo.java
+D:\项目目录\system_test\src\main\java\com\gk\entity\RefreshInfo.java
+D:\项目目录\system_test\src\main\java\com\gk\protocol\jsonManage\ConditionReq.java
+D:\项目目录\system_test\src\main\java\com\gk\protocol\jsonManage\JsonListRsp.java
+D:\项目目录\system_test\src\main\java\com\gk\util\ObjByteUtil.java
+D:\项目目录\system_test\src\main\java\com\gk\service\JsonService.java

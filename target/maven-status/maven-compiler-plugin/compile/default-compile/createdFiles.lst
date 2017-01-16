@@ -1,0 +1,11 @@
+com\gk\entity\jsonManage\CatInfo.class
+com\gk\protocol\jsonManage\AddReq.class
+com\gk\protocol\jsonManage\ConditionReq.class
+com\gk\protocol\jsonManage\JsonListRsp.class
+com\gk\service\JsonService.class
+com\gk\util\ObjByteUtil.class
+com\gk\entity\RefreshInfo.class
+com\gk\dao\CatInfoResponsitory.class
+com\gk\service\impl\JsonServiceImpl.class
+com\gk\dao\JsonDataInfoResponsitory.class
+com\gk\entity\jsonManage\JsonDataInfo.class
