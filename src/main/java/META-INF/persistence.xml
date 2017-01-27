@@ -4,8 +4,9 @@
     <persistence-unit name="persistenceUnit">
         <class>com.gk.entity.jsonManage.CatInfo</class>
         <class>com.gk.entity.jsonManage.JsonDataInfo</class>
+        <class>com.gk.entity.user.UserInfo</class>
         <properties>
-            <property name="toplink.jdbc.url" value="jdbc:mysql://192.168.0.99:3306/"/>
+            <property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/gk_master_manage"/>
             <property name="toplink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="toplink.jdbc.user"/>
             <property name="toplink.jdbc.password"/>

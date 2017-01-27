@@ -1,5 +1,7 @@
 package com.gk.controller;
 
+import com.gk.protocol.OptRsp;
+import com.gk.protocol.jsonManage.AddJsonDataReq;
 import com.gk.protocol.jsonManage.JsonListRsp;
 import com.gk.service.JsonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +22,23 @@ public class JsonController {
     public JsonListRsp getJsonList(){
         JsonListRsp rsp = jsonService.getJsonDataList(null,null);
         return rsp;
+    }
+    @RequestMapping(value = "addJson")
+    @ResponseBody
+    public OptRsp AddJson(AddJsonDataReq req){
+        OptRsp rsp = new OptRsp();
+        rsp.setStatus(1);
+        if (jsonService.addJsonData(req)) {
+            rsp.setStatus(0);
+            rsp.setTip("add Json Success");
+            return rsp;
+        }else {
+            rsp.setTip("add Json Fail");
+            return rsp;
+        }
+
+
+
+
     }
 }
