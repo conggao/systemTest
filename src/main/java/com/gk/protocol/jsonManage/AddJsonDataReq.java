@@ -1,10 +1,5 @@
 package com.gk.protocol.jsonManage;
 
-import com.gk.entity.jsonManage.CatInfo;
-import com.gk.entity.jsonManage.JsonDataInfo;
-
-import java.sql.Timestamp;
-
 /**
  * Created by pc on 2017/1/13.
  */

@@ -5,73 +5,42 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 
 /**
- * Created by pc on 2017/1/13.
+ * Created by yons on 2017/2/2.
  */
 @Entity
-@Table(name = "json_data_info", schema = "gk_json_manage", catalog = "gk_json_manage")
+@Table(name = "json_data_info", schema = "gk_json_manage", catalog = "gk_json_manages")
 public class JsonDataInfo {
-    private Long id;
+    private long id;
+    private long catId;
+    private Timestamp createTime;
+    private long createUserId;
+    private boolean isDel;
     private byte[] json;
     private String title;
-    private Long catId;
-    private Long createUserId;
-    private Timestamp createTime;
     private Timestamp updateTime;
-    private boolean isDel;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    public Long getId() {
+    @Column(name = "id")
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
     @Basic
-    @Column(name = "json", nullable = false)
-    public byte[] getJson() {
-        return json;
-    }
-
-    public void setJson(byte[] json) {
-        this.json = json;
-    }
-
-    @Basic
-    @Column(name = "title", nullable = true, length = -1)
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Basic
-    @Column(name = "catId", nullable = false)
-    public Long getCatId() {
+    @Column(name = "catId")
+    public long getCatId() {
         return catId;
     }
 
-    public void setCatId(Long catId) {
+    public void setCatId(long catId) {
         this.catId = catId;
     }
 
     @Basic
-    @Column(name = "createUserId", nullable = false)
-    public Long getCreateUserId() {
-        return createUserId;
-    }
-
-    public void setCreateUserId(Long createUserId) {
-        this.createUserId = createUserId;
-    }
-
-    @Basic
-    @Column(name = "createTime", nullable = false)
+    @Column(name = "createTime")
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -81,23 +50,53 @@ public class JsonDataInfo {
     }
 
     @Basic
-    @Column(name = "updateTime", nullable = false)
-    public Timestamp getUpdateTime() {
-        return updateTime;
+    @Column(name = "createUserId")
+    public long getCreateUserId() {
+        return createUserId;
     }
 
-    public void setUpdateTime(Timestamp updateTime) {
-        this.updateTime = updateTime;
+    public void setCreateUserId(long createUserId) {
+        this.createUserId = createUserId;
     }
 
     @Basic
-    @Column(name = "isDel", nullable = false)
+    @Column(name = "isDel")
     public boolean isDel() {
         return isDel;
     }
 
     public void setDel(boolean del) {
         isDel = del;
+    }
+
+    @Basic
+    @Column(name = "json")
+    public byte[] getJson() {
+        return json;
+    }
+
+    public void setJson(byte[] json) {
+        this.json = json;
+    }
+
+    @Basic
+    @Column(name = "title")
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Basic
+    @Column(name = "updateTime")
+    public Timestamp getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
     }
 
     @Override
@@ -111,9 +110,9 @@ public class JsonDataInfo {
         if (catId != that.catId) return false;
         if (createUserId != that.createUserId) return false;
         if (isDel != that.isDel) return false;
+        if (createTime != null ? !createTime.equals(that.createTime) : that.createTime != null) return false;
         if (!Arrays.equals(json, that.json)) return false;
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
-        if (createTime != null ? !createTime.equals(that.createTime) : that.createTime != null) return false;
         if (updateTime != null ? !updateTime.equals(that.updateTime) : that.updateTime != null) return false;
 
         return true;
@@ -122,13 +121,13 @@ public class JsonDataInfo {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (catId ^ (catId >>> 32));
+        result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
+        result = 31 * result + (int) (createUserId ^ (createUserId >>> 32));
+        result = 31 * result + (isDel ? 1 : 0);
         result = 31 * result + Arrays.hashCode(json);
         result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (int) (catId ^ (catId >>> 32));
-        result = 31 * result + (int) (createUserId ^ (createUserId >>> 32));
-        result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
         result = 31 * result + (updateTime != null ? updateTime.hashCode() : 0);
-        result = 31 * result + (isDel ? 1 : 0);
         return result;
     }
 }

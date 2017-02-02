@@ -14,6 +14,7 @@ import com.gk.util.ObjByteUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,7 +68,12 @@ public class JsonServiceImpl implements JsonService {
         dataInfo.setCreateTime(BasicUtils.getCurrentTime());
         dataInfo.setCreateUserId(1l);
         dataInfo.setDel(false);
-        dataInfo.setTitle(req.getTitle());
+        try {
+            String UtfTitle=new String(req.getTitle().getBytes("UTF-8"));
+            dataInfo.setTitle(UtfTitle);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         dataInfo.setUpdateTime(BasicUtils.getCurrentTime());
         if (null != jsonDataInfoResponsitory.save(dataInfo)) {
             return true;
@@ -97,9 +103,9 @@ public class JsonServiceImpl implements JsonService {
 
         List<JsonDataInfo> dataInfoList = new ArrayList<>();
         JsonListRsp rsp = new JsonListRsp();
-        JsonListRsp.JsonBean bean = new JsonListRsp.JsonBean();
         List<JsonListRsp.JsonBean> lists = new ArrayList<>();
         for (JsonDataInfo info : jsonDataInfoResponsitory.findAll()) {
+            JsonListRsp.JsonBean bean = new JsonListRsp.JsonBean();
             bean.setJson((String) ObjByteUtil.toObject(info.getJson()));
             bean.setTitle(info.getTitle());
             lists.add(bean);

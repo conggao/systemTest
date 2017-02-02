@@ -1,7 +1,6 @@
 package com.gk.dao;
 
 import com.gk.entity.jsonManage.CatInfo;
-import com.gk.entity.jsonManage.JsonDataInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
