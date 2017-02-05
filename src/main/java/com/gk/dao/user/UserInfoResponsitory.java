@@ -1,4 +1,4 @@
-package com.gk.dao;
+package com.gk.dao.user;
 
 import com.gk.entity.user.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;

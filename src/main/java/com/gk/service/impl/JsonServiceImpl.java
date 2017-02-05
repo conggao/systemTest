@@ -1,7 +1,7 @@
 package com.gk.service.impl;
 
-import com.gk.dao.CatInfoResponsitory;
-import com.gk.dao.JsonDataInfoResponsitory;
+import com.gk.dao.jsonManage.CatInfoResponsitory;
+import com.gk.dao.jsonManage.JsonDataInfoResponsitory;
 import com.gk.entity.jsonManage.CatInfo;
 import com.gk.entity.jsonManage.JsonDataInfo;
 import com.gk.protocol.jsonManage.AddCatReq;

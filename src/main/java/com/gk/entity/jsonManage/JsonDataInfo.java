@@ -8,7 +8,7 @@ import java.util.Arrays;
  * Created by yons on 2017/2/2.
  */
 @Entity
-@Table(name = "json_data_info", schema = "gk_json_manage", catalog = "gk_json_manages")
+@Table(name = "json_data_info", schema = "gk_json_manage", catalog = "gk_json_manage")
 public class JsonDataInfo {
     private long id;
     private long catId;
