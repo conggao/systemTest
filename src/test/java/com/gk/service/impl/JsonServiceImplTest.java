@@ -53,7 +53,7 @@ public class JsonServiceImplTest {
     }
 
     /**
-     * Method: setCatInfoResponsitory(CatInfoResponsitory catInfoResponsitory)
+     * Method: setCatInfoResponsitory(CatInfoRepository catInfoResponsitory)
      */
     @Test
     public void testSetCatInfoResponsitory() throws Exception {
@@ -69,7 +69,7 @@ public class JsonServiceImplTest {
     }
 
     /**
-     * Method: setJsonDataInfoResponsitory(JsonDataInfoResponsitory jsonDataInfoResponsitory)
+     * Method: setJsonDataInfoResponsitory(JsonDataInfoRepository jsonDataInfoResponsitory)
      */
     @Test
     public void testSetJsonDataInfoResponsitory() throws Exception {
@@ -90,15 +90,17 @@ public class JsonServiceImplTest {
         Long userId = 1l;
         AddJsonDataReq dataReq = new AddJsonDataReq();
         dataReq.setTitle("test Main");
-        User user =new User();
+        User user = new User();
         user.setPassword("hello");
         user.setUserName("gaocong");
         dataReq.setJson(JSON.toJSONString(user));
         if (service.addJsonData(dataReq)) {
             System.out.println("success");
+        } else {
+            System.out.println("fail");
         }
-        System.out.println("fail");
     }
+
     /**
      * Method: getJsonDataList(ConditionReq conditionReq)
      */
@@ -107,6 +109,7 @@ public class JsonServiceImplTest {
         JsonListRsp rsp = service.getJsonDataList(null, 1l);
         System.out.println(JSON.toJSONString(rsp));
     }
+
     /**
      * Method: RemoveJsonData(Long id)
      */
@@ -124,6 +127,4 @@ public class JsonServiceImplTest {
     }
 
 
-
-
-} 
+}

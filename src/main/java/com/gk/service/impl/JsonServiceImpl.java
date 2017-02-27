@@ -1,7 +1,7 @@
 package com.gk.service.impl;
 
-import com.gk.dao.jsonManage.CatInfoResponsitory;
-import com.gk.dao.jsonManage.JsonDataInfoResponsitory;
+import com.gk.dao.jsonManage.CatInfoRepository;
+import com.gk.dao.jsonManage.JsonDataInfoRepository;
 import com.gk.entity.jsonManage.CatInfo;
 import com.gk.entity.jsonManage.JsonDataInfo;
 import com.gk.protocol.jsonManage.AddCatReq;
@@ -24,26 +24,10 @@ import java.util.List;
 @Service
 public class JsonServiceImpl implements JsonService {
 
-    private CatInfoResponsitory catInfoResponsitory;
-    private JsonDataInfoResponsitory jsonDataInfoResponsitory;
-
-    public CatInfoResponsitory getCatInfoResponsitory() {
-        return catInfoResponsitory;
-    }
-
     @Autowired
-    public void setCatInfoResponsitory(CatInfoResponsitory catInfoResponsitory) {
-        this.catInfoResponsitory = catInfoResponsitory;
-    }
-
-    public JsonDataInfoResponsitory getJsonDataInfoResponsitory() {
-        return jsonDataInfoResponsitory;
-    }
-
+    private CatInfoRepository catInfoRepository;
     @Autowired
-    public void setJsonDataInfoResponsitory(JsonDataInfoResponsitory jsonDataInfoResponsitory) {
-        this.jsonDataInfoResponsitory = jsonDataInfoResponsitory;
-    }
+    private JsonDataInfoRepository jsonDataInfoRepository;
 
     @Override
     public boolean TestJson(String jsonString) {
@@ -75,7 +59,7 @@ public class JsonServiceImpl implements JsonService {
             e.printStackTrace();
         }
         dataInfo.setUpdateTime(BasicUtils.getCurrentTime());
-        if (null != jsonDataInfoResponsitory.save(dataInfo)) {
+        if (null != jsonDataInfoRepository.save(dataInfo)) {
             return true;
         }
         return false;
@@ -104,7 +88,7 @@ public class JsonServiceImpl implements JsonService {
         List<JsonDataInfo> dataInfoList = new ArrayList<>();
         JsonListRsp rsp = new JsonListRsp();
         List<JsonListRsp.JsonBean> lists = new ArrayList<>();
-        for (JsonDataInfo info : jsonDataInfoResponsitory.findAll()) {
+        for (JsonDataInfo info : jsonDataInfoRepository.findAll()) {
             JsonListRsp.JsonBean bean = new JsonListRsp.JsonBean();
             bean.setJson((String) ObjByteUtil.toObject(info.getJson()));
             bean.setTitle(info.getTitle());
@@ -142,7 +126,7 @@ public class JsonServiceImpl implements JsonService {
      */
     @Override
     public CatInfo getRootCatInfoByUserId(Long userId) {
-        return getCatInfoResponsitory().findByParentIdAndCreateUserIdAndDel(null, userId, false);
+        return catInfoRepository.findByParentIdAndCreateUserIdAndDel(null, userId, false);
     }
 
     @Override
@@ -154,7 +138,7 @@ public class JsonServiceImpl implements JsonService {
         info.setDel(false);
         info.setShare(false);
         info.setCreateUserId(userId);
-        return catInfoResponsitory.saveAndFlush(info);
+        return catInfoRepository.saveAndFlush(info);
 
 
     }

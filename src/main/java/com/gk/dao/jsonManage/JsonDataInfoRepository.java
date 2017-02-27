@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * Created by pc on 2017/1/13.
  */
-public interface JsonDataInfoResponsitory extends JpaRepository<JsonDataInfo,Long>{
+public interface JsonDataInfoRepository extends JpaRepository<JsonDataInfo,Long>{
 
 }
