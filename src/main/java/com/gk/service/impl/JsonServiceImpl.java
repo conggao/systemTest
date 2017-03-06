@@ -1,7 +1,9 @@
 package com.gk.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.gk.dao.jsonManage.CatInfoRepository;
 import com.gk.dao.jsonManage.JsonDataInfoRepository;
+import com.gk.entity.DefineForm;
 import com.gk.entity.jsonManage.CatInfo;
 import com.gk.entity.jsonManage.JsonDataInfo;
 import com.gk.protocol.jsonManage.AddCatReq;
@@ -34,6 +36,12 @@ public class JsonServiceImpl implements JsonService {
         return false;
     }
 
+    /**
+     * 添加json数据
+     *
+     * @param req
+     * @return
+     */
     @Override
     public boolean addJsonData(AddJsonDataReq req) {
         Long catId = req.getCatId();
@@ -53,7 +61,7 @@ public class JsonServiceImpl implements JsonService {
         dataInfo.setCreateUserId(1l);
         dataInfo.setDel(false);
         try {
-            String UtfTitle=new String(req.getTitle().getBytes("UTF-8"));
+            String UtfTitle = new String(req.getTitle().getBytes("UTF-8"));
             dataInfo.setTitle(UtfTitle);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -65,13 +73,31 @@ public class JsonServiceImpl implements JsonService {
         return false;
     }
 
+    /**
+     * 添加自定义表单字段
+     *
+     * @return
+     */
     @Override
-    public boolean RemoveJsonData(Long id) {
+    public boolean addDefineFormData(DefineForm defineForm) {
+        CatInfo formData = checkFormCat("formData",1l);
+        AddJsonDataReq req = new AddJsonDataReq();
+        req.setTitle("表单数据");
+        req.setCatId(formData.getId());
+        req.setJson(JSON.toJSONString(defineForm));
+        if (addJsonData(req)) {
+            return true;
+        }
         return false;
     }
 
     @Override
-    public boolean ModifyJsonData(Long id, AddJsonDataReq req) {
+    public boolean removeJsonData(Long id) {
+        return false;
+    }
+
+    @Override
+    public boolean modifyJsonData(Long id, AddJsonDataReq req) {
         return false;
     }
 
@@ -88,7 +114,7 @@ public class JsonServiceImpl implements JsonService {
         List<JsonDataInfo> dataInfoList = new ArrayList<>();
         JsonListRsp rsp = new JsonListRsp();
         List<JsonListRsp.JsonBean> lists = new ArrayList<>();
-        for (JsonDataInfo info : jsonDataInfoRepository.findAll()) {
+        for (JsonDataInfo info : jsonDataInfoRepository.findByCatIdAndCreateUserIdAndDel(conditionReq.getCatId(), userId, false)) {
             JsonListRsp.JsonBean bean = new JsonListRsp.JsonBean();
             bean.setJson((String) ObjByteUtil.toObject(info.getJson()));
             bean.setTitle(info.getTitle());
@@ -96,6 +122,14 @@ public class JsonServiceImpl implements JsonService {
         }
         rsp.setLists(lists);
         return rsp;
+    }
+
+    @Override
+    public JsonListRsp getFormDataList(Long userId) {
+        CatInfo formCat= checkFormCat("formData", 1l);
+        ConditionReq req = new ConditionReq();
+        req.setCatId(formCat.getId());
+        return getJsonDataList(req, 1l);
     }
 
     /**
@@ -118,6 +152,23 @@ public class JsonServiceImpl implements JsonService {
         return rootCat;
     }
 
+    private CatInfo checkFormCat(String formName, Long userId) {
+        CatInfo root = checkRoot(userId, "root");
+        CatInfo formCat = getFormCatInfoByRootId(root.getId(), userId);
+        if (null == formCat) {
+            AddCatReq catReq = new AddCatReq();
+            catReq.setName(formName);
+            catReq.setParentId(root.getId());
+            formCat = addCat(catReq, 1l);
+            if (null == formCat) {
+                return null;
+            }
+            return formCat;
+        }
+        return formCat;
+    }
+
+
     /**
      * 查询用户的根分类信息
      *
@@ -128,6 +179,17 @@ public class JsonServiceImpl implements JsonService {
     public CatInfo getRootCatInfoByUserId(Long userId) {
         return catInfoRepository.findByParentIdAndCreateUserIdAndDel(null, userId, false);
     }
+
+    /**
+     * 查询用户下form定义信息
+     *
+     * @param rootId
+     * @return
+     */
+    private CatInfo getFormCatInfoByRootId(Long rootId, Long userId) {
+        return catInfoRepository.findByParentIdAndCreateUserIdAndDel(rootId, userId, false);
+    }
+
 
     @Override
     public CatInfo addCat(AddCatReq req, Long userId) {

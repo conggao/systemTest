@@ -7,15 +7,15 @@ import com.gk.entity.jsonManage.CatInfo;
  * Created by pc on 2017/1/13.
  */
 public class ConditionReq {
-    private CatInfo catInfo;
+    private Long  catId;
     private RefreshInfo refreshInfo;
 
-    public CatInfo getCatInfo() {
-        return catInfo;
+    public Long getCatId() {
+        return catId;
     }
 
-    public void setCatInfo(CatInfo catInfo) {
-        this.catInfo = catInfo;
+    public void setCatId(Long catId) {
+        this.catId = catId;
     }
 
     public RefreshInfo getRefreshInfo() {

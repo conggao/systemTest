@@ -1,5 +1,6 @@
 package com.gk.service;
 
+import com.gk.entity.DefineForm;
 import com.gk.entity.jsonManage.CatInfo;
 import com.gk.protocol.jsonManage.AddCatReq;
 import com.gk.protocol.jsonManage.AddJsonDataReq;
@@ -17,12 +18,15 @@ public interface JsonService {
      */
     boolean addJsonData(AddJsonDataReq req);
 
-    boolean RemoveJsonData(Long id);
+    boolean addDefineFormData(DefineForm defineForm);
 
-    boolean ModifyJsonData(Long id, AddJsonDataReq req);
+    boolean removeJsonData(Long id);
+
+    boolean modifyJsonData(Long id, AddJsonDataReq req);
 
     JsonListRsp getJsonDataList(ConditionReq conditionReq,Long userId);
 
+    JsonListRsp getFormDataList(Long userId);
     /*
      目录操作
       */

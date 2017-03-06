@@ -1,4 +1,4 @@
-package com.gk.commen.config;
+package com.gk.commen.config.cors;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

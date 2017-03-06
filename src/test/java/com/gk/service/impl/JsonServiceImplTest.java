@@ -111,7 +111,7 @@ public class JsonServiceImplTest {
     }
 
     /**
-     * Method: RemoveJsonData(Long id)
+     * Method: removeJsonData(Long id)
      */
     @Test
     public void testRemoveJsonData() throws Exception {
@@ -119,7 +119,7 @@ public class JsonServiceImplTest {
     }
 
     /**
-     * Method: ModifyJsonData(Long id, AddJsonDataReq req)
+     * Method: modifyJsonData(Long id, AddJsonDataReq req)
      */
     @Test
     public void testModifyJsonData() throws Exception {
