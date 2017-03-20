@@ -4,12 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.gk.dao.jsonManage.CatInfoRepository;
 import com.gk.dao.jsonManage.JsonDataInfoRepository;
 import com.gk.entity.DefineForm;
-import com.gk.entity.jsonManage.CatInfo;
-import com.gk.entity.jsonManage.JsonDataInfo;
-import com.gk.protocol.jsonManage.AddCatReq;
-import com.gk.protocol.jsonManage.AddJsonDataReq;
-import com.gk.protocol.jsonManage.ConditionReq;
-import com.gk.protocol.jsonManage.JsonListRsp;
+import com.gk.entity.json.CatInfo;
+import com.gk.entity.json.JsonDataInfo;
+import com.gk.protocol.cat.AddCatReq;
+import com.gk.protocol.json.AddJsonDataReq;
+import com.gk.protocol.json.ConditionReq;
+import com.gk.protocol.json.JsonListRsp;
 import com.gk.service.JsonService;
 import com.gk.util.BasicUtils;
 import com.gk.util.ObjByteUtil;
@@ -44,6 +44,7 @@ public class JsonServiceImpl implements JsonService {
      */
     @Override
     public boolean addJsonData(AddJsonDataReq req) {
+        //不传目录id，json放到用户根目录下
         Long catId = req.getCatId();
         if (null == catId) {
             CatInfo rootCat = checkRoot(1l, "root");
@@ -80,7 +81,7 @@ public class JsonServiceImpl implements JsonService {
      */
     @Override
     public boolean addDefineFormData(DefineForm defineForm) {
-        CatInfo formData = checkFormCat("formData",1l);
+        CatInfo formData = checkFormCat("formData", 1l);
         AddJsonDataReq req = new AddJsonDataReq();
         req.setTitle("表单数据");
         req.setCatId(formData.getId());
@@ -126,7 +127,7 @@ public class JsonServiceImpl implements JsonService {
 
     @Override
     public JsonListRsp getFormDataList(Long userId) {
-        CatInfo formCat= checkFormCat("formData", 1l);
+        CatInfo formCat = checkFormCat("formData", 1l);
         ConditionReq req = new ConditionReq();
         req.setCatId(formCat.getId());
         return getJsonDataList(req, 1l);
@@ -153,8 +154,10 @@ public class JsonServiceImpl implements JsonService {
     }
 
     private CatInfo checkFormCat(String formName, Long userId) {
+        //查询根目录
         CatInfo root = checkRoot(userId, "root");
-        CatInfo formCat = getFormCatInfoByRootId(root.getId(), userId);
+        //表单根目录位于用户根目录下
+        CatInfo formCat = getFormCatInfoByRootId(root.getId(), userId,"formRoot").get(0);
         if (null == formCat) {
             AddCatReq catReq = new AddCatReq();
             catReq.setName(formName);
@@ -170,24 +173,25 @@ public class JsonServiceImpl implements JsonService {
 
 
     /**
-     * 查询用户的根分类信息
+     * 查询用户的根目录信息
      *
      * @param userId 用户id
-     * @return
+     * @return 用户根目录
      */
     @Override
     public CatInfo getRootCatInfoByUserId(Long userId) {
-        return catInfoRepository.findByParentIdAndCreateUserIdAndDel(null, userId, false);
+        return catInfoRepository.findByParentIdAndCreateUserIdAndNameAndDel(null, userId,"root", false).get(0);
     }
 
     /**
-     * 查询用户下form定义信息
+     *查询子目录
      *
-     * @param rootId
+     * @param parentId 父目录id
+     * @param
      * @return
      */
-    private CatInfo getFormCatInfoByRootId(Long rootId, Long userId) {
-        return catInfoRepository.findByParentIdAndCreateUserIdAndDel(rootId, userId, false);
+    private List<CatInfo> getFormCatInfoByRootId(Long parentId, Long userId, String name) {
+        return catInfoRepository.findByParentIdAndCreateUserIdAndNameAndDel(parentId, userId,name, false);
     }
 
 

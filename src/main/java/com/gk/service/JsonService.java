@@ -1,11 +1,11 @@
 package com.gk.service;
 
 import com.gk.entity.DefineForm;
-import com.gk.entity.jsonManage.CatInfo;
-import com.gk.protocol.jsonManage.AddCatReq;
-import com.gk.protocol.jsonManage.AddJsonDataReq;
-import com.gk.protocol.jsonManage.ConditionReq;
-import com.gk.protocol.jsonManage.JsonListRsp;
+import com.gk.entity.json.CatInfo;
+import com.gk.protocol.cat.AddCatReq;
+import com.gk.protocol.json.AddJsonDataReq;
+import com.gk.protocol.json.ConditionReq;
+import com.gk.protocol.json.JsonListRsp;
 
 /**
  * Created by pc on 2017/1/13.

@@ -2,10 +2,10 @@ package com.gk.controller;
 
 import com.gk.entity.user.UserInfo;
 import com.gk.protocol.OptRsp;
-import com.gk.protocol.userManage.LoginReq;
+import com.gk.protocol.user.LoginReq;
+import com.gk.protocol.user.RigistReq;
 import com.gk.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,6 +41,14 @@ public class UserController {
             rsp.setTip("login fail");
             return rsp;
         }
+    }
+    @ApiOperation(value = "rigist",httpMethod = "POST")
+    @ApiImplicitParam(value = "req",name = "req",dataType = "RigistReq")
+    @RequestMapping(value = "rigist",method = RequestMethod.POST)
+
+    public OptRsp rigist(@RequestBody RigistReq req){
+        OptRsp rsp = new OptRsp();
+        return rsp;
     }
 
 

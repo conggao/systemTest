@@ -2,8 +2,9 @@ package com.gk.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.gk.protocol.OptRsp;
-import com.gk.protocol.jsonManage.AddJsonDataReq;
-import com.gk.protocol.jsonManage.JsonListRsp;
+import com.gk.protocol.cat.AddCatReq;
+import com.gk.protocol.json.AddJsonDataReq;
+import com.gk.protocol.json.JsonListRsp;
 import com.gk.service.JsonService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -45,9 +46,20 @@ public class JsonController {
             rsp.setTip("add Json Fail");
             return rsp;
         }
+    }
+    @ApiOperation(value = "addCat",httpMethod = "POST")
+    @ApiImplicitParam(value = "req",dataType = "com.gk.protocol.cat.AddCatReq")
+    @RequestMapping(value = "addCat",method = RequestMethod.POST,produces = "application/json")
+    @ResponseBody
+    public OptRsp AddCat(AddCatReq req){
 
-
-
-
+        OptRsp rsp = new OptRsp();
+        rsp.setStatus(0);
+    rsp.setTip("添加目录失败");
+        if (null!=jsonService.addCat(req,1l)){
+            rsp.setStatus(1);
+            rsp.setTip("添加目录成功");
+        }
+        return rsp;
     }
 }

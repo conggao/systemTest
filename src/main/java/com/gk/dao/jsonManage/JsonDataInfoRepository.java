@@ -1,6 +1,6 @@
 package com.gk.dao.jsonManage;
 
-import com.gk.entity.jsonManage.JsonDataInfo;
+import com.gk.entity.json.JsonDataInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

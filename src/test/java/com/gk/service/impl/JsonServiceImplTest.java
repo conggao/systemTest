@@ -1,11 +1,9 @@
 package com.gk.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.gk.entity.jsonManage.CatInfo;
 import com.gk.entity.user.User;
-import com.gk.protocol.jsonManage.AddCatReq;
-import com.gk.protocol.jsonManage.AddJsonDataReq;
-import com.gk.protocol.jsonManage.JsonListRsp;
+import com.gk.protocol.json.AddJsonDataReq;
+import com.gk.protocol.json.JsonListRsp;
 import com.gk.service.JsonService;
 import org.junit.Test;
 import org.junit.Before;

@@ -1,10 +1,8 @@
 package com.gk.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.gk.entity.DefineForm;
 import com.gk.protocol.OptRsp;
-import com.gk.protocol.jsonManage.AddJsonDataReq;
-import com.gk.protocol.jsonManage.JsonListRsp;
+import com.gk.protocol.json.JsonListRsp;
 import com.gk.service.JsonService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;

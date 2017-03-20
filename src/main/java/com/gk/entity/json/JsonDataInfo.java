@@ -1,4 +1,4 @@
-package com.gk.entity.jsonManage;
+package com.gk.entity.json;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

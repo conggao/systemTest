@@ -1,7 +1,7 @@
 package com.gk.entity;
 
 import com.alibaba.fastjson.JSON;
-import com.gk.protocol.jsonManage.AddJsonDataReq;
+import com.gk.protocol.json.AddJsonDataReq;
 import org.junit.Test;
 
 /**
