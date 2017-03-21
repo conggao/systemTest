@@ -58,6 +58,7 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.12</version>
         </dependency>
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo</artifactId>
@@ -75,9 +76,9 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <fork>true</fork>
-                    <jvmArguments>
+                  <!--  <jvmArguments>
                         -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005
-                    </jvmArguments>
+                    </jvmArguments>-->
                 </configuration>
                 <dependencies>
                     <dependency>
