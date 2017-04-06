@@ -1,4 +1,4 @@
-package com.gk.protocol.userManage;
+package com.gk.protocol.user;
 
 /**
  * Created by yons on 2017/1/27.

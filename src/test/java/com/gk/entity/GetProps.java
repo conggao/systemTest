@@ -1,7 +1,7 @@
 package com.gk.entity;
 
 import com.alibaba.fastjson.JSON;
-import com.gk.protocol.jsonManage.AddCatReq;
+import com.gk.protocol.cat.AddCatReq;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
