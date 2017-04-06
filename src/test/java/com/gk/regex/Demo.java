@@ -12,6 +12,7 @@ public class Demo {
     @Test
     public void findNums() {
         String Line = "null(1)(1)(1)(1)(1)(1)(1)(1)(1)(1).hello";
+        //命名模式定义，\\( -(,   .* 任意字符串
         String pattern = "(?<delString>null\\(.*\\)\\.)(?<fileName>.*)";
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(Line);

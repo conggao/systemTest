@@ -14,6 +14,7 @@ import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.path;
 
 public class CreateDir {
     @Test
+    //生成后台基本文件夹
     public void createDirs() {
         List<String> dirList = new ArrayList<>();
         dirList.add("controller");

@@ -14,6 +14,7 @@ import java.util.List;
 public class GetProps {
     @Test
     public void getProps(){
+        //获取类的属性值和类型
         Class addCatReq = AddCatReq.class;
         Field[] fields = addCatReq.getDeclaredFields();
         List<String> fieldList = new ArrayList<>();
